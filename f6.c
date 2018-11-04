@@ -5,9 +5,9 @@ int* sort(int c,int *a)
 	int i,j,t;
 	for(i=0;i<c-1;i++)
 	{
-		for(j=i;j<c;j++)
+		for(j=0;j<c-1;j++)
 		{
-			if(a[j]>a[j+1])
+			if(a[j]>=a[j+1])
 			{
 				t=a[j];
 				a[j]=a[j+1];
