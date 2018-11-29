@@ -1,26 +1,41 @@
 #include<stdio.h>
-void main()
+
+int main()
 {
-	int c=0,pr=1,n,i,j,odd,evn,rod=0,revn=0;
-	printf("Enter two numbers:\n");
-	scanf("%d%d",&odd,&evn);
-	for(i=n;i>0;i=i/10)
-		c++;
-	for(i=odd;i>0;i=i/10)
-		rod=rod*10+i%10;
-	for(i=evn;i>0;i=i/10)
-		revn=revn*10+i%10;
-	i=1;
-	printf("Output is:");
-	while(rod!=0||revn!=0)
+	FILE *s,*t;
+	char ch;
+	s=fopen("file1.txt","a");
+	t=fopen("file2.txt","r");
+	if(s==NULL || t==NULL)
 	{
-		if(i%2!=0&&rod!=0)
-			printf("%d",rod%10);
-		else if(revn!=0)
-			printf("%d",revn%10);
-		rod=rod/10;
-		revn=revn/10;
-		i++;
+		printf("File cannot be opened...");
+		exit(0);
 	}
-	printf("\n");
+	
+	while(1)
+	{
+		ch=getc(t);
+		if(ch==EOF)
+			break;
+		putc(ch,s);
+	}
+	fclose(s);
+	fclose(t);
+	s=fopen("file1.txt","r");
+	if(s==NULL)
+	{
+		printf("File cannot be opened...");
+		exit(0);
+	}
+	
+	printf("Contents after appending : \n\n");
+	while(1)
+	{
+		ch=getc(s);
+		if(ch==EOF)
+			break;
+		printf("%c",ch);
+	}
+	fclose(s);
+	fclose(t);
 }

@@ -1,19 +1,40 @@
 #include<stdio.h>
-void main()
+#include<string.h>
+#define size 100
+
+int main()
 {
-	int n,p,c=0,i;
-	printf("Enter a number: ");
-	scanf("%d",&n);
-	for(i=1;i<n;i++)
+	FILE *f;
+	char ch,s1[size],s2[size];
+	int i,j,k;
+	f=fopen("reverse.txt","r");
+	if(f==NULL)
 	{
-		if(n%i==0)
-		{
-			c++;
-			
-		}
+		printf("File cannot be opened...");
+		exit(0);
 	}
-	if(c==1)
-		printf("%d is PRIME\n\n",n);
+	i=0;
+	while(1)
+	{
+		ch=getc(f);
+		if(ch==EOF)
+			break;
+		s1[i]=ch;
+		i++;
+	}
+	j=i-1;
+	k=0;
+	while(j>=0)
+	{
+		s2[k]=s1[j];
+		k++;
+		j--;
+	}
+	s2[k]='\0';
+	printf("Original string : \n%s\nReverse String : \n%s\n",s1,s2);
+	if(strcmp(s1,s2)==0)
+		printf("Both strings are equal...\n");
 	else
-		printf("%d is NOT PRIME\n\n",n);
+		printf("Strings are not equal...");
+	fclose(f);
 }

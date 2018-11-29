@@ -1,20 +1,29 @@
 #include<stdio.h>
-void main()
+
+int main()
 {
-	int n,t,r,m;
-	printf("Enter a number: ");
-	scanf("%d",&n);
-	t=n;
-	r=0;
-	while(n!=0)
+	FILE *s,*t;
+	char ch;
+	s=fopen("sample.txt","r");
+	if(s==NULL)
 	{
-		m=n%10;
-		r=r*10+m;
-		n=n/10;
+		printf("File cannot be opened...\n");
+		exit(1);
 	}
-	printf("Reverse of the number is : %d\n",r);
-	if(r==t)
-		printf("\nPalindrome\n\n");
-	else
-		printf("\nNot palindrome\n\n");
+	t=fopen("new.txt","w");
+	if(t==NULL)
+	{
+		printf("File cannot be opened...\n");
+		exit(0);
+	}
+	while(1)
+	{
+		ch=getc(s);
+		if(ch==EOF)
+			break;
+		putc(ch,t);
+		//printf("%c",ch);
+	}
+	fclose(s);
+	fclose(t);
 }

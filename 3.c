@@ -1,16 +1,48 @@
 #include<stdio.h>
-void main()
+
+int main()
 {
-	int i,j,n;
-	printf("Enter number of rows: ");
-	scanf("%d",&n);
-	for(i=1;i<=n;i++)
+	FILE *s,*t;
+	char ch,u;
+	s=fopen("sample.txt","r");
+	t=fopen("new.txt","w");
+	if(s==NULL || t==NULL)
 	{
-		for(j=1;j<=i;j++)
-		{
-			printf("%d",i);
-		}
-		printf("\n");
+		printf("File cannot be opened...\n");
+		exit(0);
 	}
-}
 	
+	while(1)
+	{
+		ch=getc(s);
+		if(ch==EOF)
+			break;
+		
+		if(ch>=97&&ch<=122)
+		{
+			u=(char)(ch-32);
+		}
+		else
+			u=ch;
+		putc(u,t);
+	//	printf("%c",u);
+	}
+	
+	fclose(t);
+	t=fopen("new.txt","r");
+	if(t==NULL)
+	{
+		printf("File cannot be opened...\n");
+		exit(0);
+	}
+	
+	while(1)
+	{
+		ch=getc(t);
+		if(ch==EOF)
+			break;
+		printf("%c",ch);
+	}
+	fclose(s);
+	fclose(t);
+}
